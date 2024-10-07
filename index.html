@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.0"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f4f8;
+            max-width: 1200px;
+            margin: auto; /* Center the content */
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            gap: 20px;
+        }
+
+        .map-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            max-width: 600px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .chart-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .heatmap-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            /* max-width: 300px; */
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .bar-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            max-width: 500px;
+            height: 200px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .figure-10-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            max-width: 500px;
+            height: 200px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .figure-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 200px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .content-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 240px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .conclusion {
+            text-align: center;
+            border-radius: 10px;
+            background-color: #e3f2fd;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 500px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+        .content-chart-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 280px;
+            overflow: hidden; /* Prevent overflow inside containers */
+        }
+
+        .chart-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .description {
+            flex-basis: 100%; /* Full width */
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .findings {
+            flex-basis: 100%; /* Full width */
+            background-color: #ffe0b2;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .figure {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #e67e22;
+        }
+
+        .statistic {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #27ae60;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Visualizations of Arrivals and Visa Statistics</h1>
+
+    <div class="dashboard">
+        <div class="description">
+            <h2>Overview</h2>
+            <p>This dashboard presents a comprehensive analysis of arrivals and visa statistics for Australia from 2014 to 2024. The visualizations include a choropleth map, stacked bar chart, heatmap, and line chart, providing insights into visa types and arrivals.</p>
+        </div>
+
+        <div class="figure-container">
+            <div class="chart-title">2024 FIGURE</div>
+            <p>Some number here</p>
+        </div>
+         <div class="map-container">
+            <div class="chart-title">Number of Arrivals to Australia by Citizen</div>
+            <div id="vis1"></div> <!-- Map Visualization -->
+        </div>
+        <div class="content-container">
+            <div class="chart-title">Content for map</div>
+            <p>Description/briefly tell story</p>
+        </div>
+        
+        <div class="description">
+            <h2>The past 10 years of Autralian</h2>
+            <p>This dashboard presents a comprehensive analysis of arrivals and visa statistics for Australia from 2014 to 2024. The visualizations include a choropleth map, stacked bar chart, heatmap, and line chart, providing insights into visa types and arrivals.</p>
+        </div>
+        <div class="chart-container">
+            <div class="chart-title">Arrivals Visa Issued in Australia (2014 - 2024)</div>
+            <div id="vis2"></div> <!-- Stacked Bar Chart Visualization -->
+        </div>
+        <div class="content-chart-container">
+            <div class="chart-title">Content for chart</div>
+            <p>Description/briefly tell story</p>
+        </div>
+        <div class="heatmap-container">
+            <div class="chart-title">Visa Types Issued across States</div>
+            <div id="vis3"></div> <!-- Heatmap Visualization -->
+        </div>
+        <!-- <div class="bar-container">
+            <div class="chart-title">Top Student Visa Type Issued</div>
+            <div id="vis4"></div> 
+        </div> -->
+        <div class="conclusion">
+            <h2>Summary of Findings</h2>
+            <p>text here</p>
+        </div>
+
+     
+      
+    <script>
+        // Map Visualization
+        const citizenMap = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": "Number of Arrivals to Australia by Citizen in 2024",
+            "width": 400,
+            "height": 300,
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "projection": {
+                "type": "equalEarth"
+            },
+            "layer": [
+                {
+                    "transform": [
+                        {
+                            "calculate": "'Data is not available in ' + datum.properties.NAME",
+                            "as": "note"
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": "lightgray",
+                        "stroke": "white"
+                    },
+                    "encoding": {
+                        "tooltip": {
+                            "field": "note"
+                        }
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+                        "format": {
+                            "type": "topojson",
+                            "feature": "oceans"
+                        }
+                    },
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": "skyblue"
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+                        "format": {
+                            "type": "topojson",
+                            "feature": "ne_110m_graticules_30"
+                        }
+                    },
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": null,
+                        "stroke": "lightgray"
+                    }
+                },
+                {
+                    "transform": [
+                        {
+                            "lookup": "properties.NAME",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/RoshaOwO/homework9/b2f3d015601bdc064f4d8574cac90150b8ff41cc/hw9.csv",
+                                    "format": {
+                                        "type": "csv"
+                                    }
+                                },
+                                "key": "Country",
+                                "fields": [
+                                    "Total_Arrival",
+                                    "Population"
+                                ]
+                            }
+                        },
+                        {
+                            "calculate": "datum.Total_Arrival/datum.Population * 100000",
+                            "as": "Arrivals per 100,000 population"
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape"
+                    },
+                    "encoding": {
+                        "color": {
+                            "field": "Arrivals per 100,000 population",
+                            "type": "quantitative",
+                            "scale": {
+                                "type": "threshold",
+                                "domain": [1, 10, 50, 100],
+                                "range": ["#e5f5e0", "#a1d99b", "#74c476", "#41ab5d", "#006d2c"]
+                            }
+                        },
+                        "tooltip": [
+                            {
+                                "field": "properties.NAME",
+                                "type": "nominal",
+                                "title": "Country"
+                            },
+                            {
+                                "field": "Arrivals per 100,000 population",
+                                "type": "quantitative"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+
+        // Stacked Bar Chart Visualization
+        const stackBar = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            // "title": "Arrivals Visa Issued in Australia (2014 - 2024)",
+            "width": 550,
+            "height": 250,
+            "data": {
+                "url": "https://raw.githubusercontent.com/pchu0023/ass2/e767a6ad922d24cb0a409a2e1fab26c96bd51bd9/sub-visa-state.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "params": [
+                {
+                    "name": "State_selection",
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            null, "NSW", "VIC", "QLD", "WA", "SA", "TAS", "NT"
+                        ],
+                        "labels": [
+                            "Show All", "New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania", "Northern Territory"
+                        ],
+                        "name": "State Selection: "
+                    }
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "State_selection == null || datum.State == State_selection"
+                },
+                {
+                    "fold": [
+                        "Permanent Visas - Total",
+                        "Temporary Student Visas - Total",
+                        "Temporary Visitor Visas",
+                        "Temporary Other Visas - Total",
+                        "Other Visas(h)"
+                    ],
+                    "as": ["Visa Type", "Total"]
+                },
+                {
+                    "calculate": "datetime(datum.Month)",
+                    "as": "Date"
+                },
+                {
+                    "calculate": "replace(datum['Visa Type'], ' - Total', '')",
+                    "as": "Visa Type Cleaned"
+                }
+            ],
+            "layer": [
+                {
+                    "mark": "bar",
+                    "encoding": {
+                        "x": {
+                            "field": "Date",
+                            "type": "temporal",
+                            "axis": {
+                                "title": "Month",
+                                "format": "%b %Y"
+                            }
+                        },
+                        "y": {
+                            "aggregate": "sum",
+                            "field": "Total",
+                            "type": "quantitative",
+                            "axis": {
+                                "title": "Total Visa Issued"
+                            }
+                        },
+                        "color": {
+                            "field": "Visa Type Cleaned",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": [
+                                    "Permanent Visas",
+                                    "Temporary Student Visas",
+                                    "Temporary Visitor Visas",
+                                    "Temporary Other Visas",
+                                    "Other Visas"
+                                ],
+                                "range": [
+                                    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"
+                                ]
+                            },
+                            "legend": {
+                                "title": "Visa Type"
+                            }
+                        },
+                        "tooltip": [
+                            { "field": "Month", "title": "Month" },
+                            { "field": "Total", "title": "Total Visa Issued" },
+                            { "field": "Visa Type Cleaned", "title": "Visa Type" },
+                            { "field": "State", "title": "State" }
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 12.5,
+                        "fill": "red"
+                    },
+                    "encoding": {
+                        "text": { "value": "COVID-19" },
+                        "x": { "value": 380 },
+                        "y": { "value": 100 }
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 12.5,
+                        "fill": "red"
+                    },
+                    "encoding": {
+                        "text": { "value": "Border close-open:" },
+                        "x": { "value": 380 },
+                        "y": { "value": 125 }
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 12.5,
+                        "fill": "red"
+                    },
+                    "encoding": {
+                        "text": { "value": "Mar 2020 - Nov 2021" },
+                        "x": { "value": 380 },
+                        "y": { "value": 150 }
+                    }
+                }
+            ]
+        };
+
+        // Heatmap Visualization
+        const heatGeneral = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 300,
+            "height": 250,
+            "data": {
+                "url": "https://raw.githubusercontent.com/pchu0023/ass2/e767a6ad922d24cb0a409a2e1fab26c96bd51bd9/sub-visa-state.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "params": [
+                {
+                    "name": "State_selection",
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            null,
+                            "NSW",
+                            "VIC",
+                            "QLD",
+                            "WA",
+                            "SA",
+                            "TAS",
+                            "NT"
+                        ],
+                        "labels": [
+                            "Show All",
+                            "New South Wales",
+                            "Victoria",
+                            "Queensland",
+                            "Western Australia",
+                            "South Australia",
+                            "Tasmania",
+                            "Northern Territory"
+                        ],
+                        "name": "State Selection: "
+                    }
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "State_selection == null || datum.State == State_selection"
+                },
+                {
+                    "fold": [
+                        "Permanent Family Visas",
+                        "Permanent Skilled Visas",
+                        "Permanent Other Visas",
+                        "Temporary Student Visas - Total",
+                        "Temporary Skilled Visas",
+                        "Temporary Work Visas",
+                        "Temporary Other Visas",
+                        "Other Visas(h)"
+                    ],
+                    "as": ["Visa Type", "Count"]
+                },
+                {
+                    "calculate": "year(datum.Month + '-01')",
+                    "as": "Year"
+                },
+                {
+                    "aggregate": [
+                        {
+                            "op": "sum",
+                            "field": "Count",
+                            "as": "Total Count"
+                        }
+                    ],
+                    "groupby": ["Year", "Visa Type"]
+                }
+            ],
+            "encoding": {
+                "x": {
+                    "field": "Year",
+                    "type": "ordinal",
+                    "title": "Year"
+                },
+                "y": {
+                    "field": "Visa Type",
+                    "type": "nominal",
+                    "title": "Visa Type"
+                },
+                "color": {
+                    "field": "Total Count",
+                    "type": "quantitative",
+                    "title": "Visa Count",
+                    "scale": {
+                        "domain": [
+                            3000, 7000, 10000, 100000, 400000
+                        ],
+                        "range": ["#f7fbff", "#deebf7", "#9ecae1", "#3182bd", "#08519c"]
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "Visa Type",
+                        "type": "nominal",
+                        "title": "Visa Type"
+                    },
+                    {
+                        "field": "Total Count",
+                        "type": "quantitative",
+                        "title": "Count"
+                    }
+                ]
+            },
+            "mark": "rect"
+        };
+
+        // Line Chart Visualization
+        const stuLine = {
+            
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 400,
+            "height": 300,
+            "data": {
+                "url": "https://raw.githubusercontent.com/pchu0023/ass2/103fab55969ab2ef1bdb20f8357522798e828558/sub-visa-state.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "transform": [
+                {
+                    "fold": [
+                        "Temporary Student Visas - Higher Education",
+                        "Temporary Student Visas - Vocational",
+                        "Temporary Student Visas - Schools",
+                        "Temporary Student Visas - Independent ELICOS(g)",
+                        "Temporary Student Visas - Postgraduate Research",
+                        "Temporary Student Visas - Other Students"
+                    ],
+                    "as": ["Visa Type", "Number"]
+                },
+                {
+                    "filter": "datum.Number !== null"
+                },
+                {
+                    "calculate": "year(datum.Month)",
+                    "as": "Year"
+                },
+                {
+                    "aggregate": [
+                        {
+                            "op": "sum",
+                            "field": "Number",
+                            "as": "Total"
+                        }
+                    ],
+                    "groupby": ["Year", "Visa Type"]
+                },
+                {
+                    "calculate": "replace(datum['Visa Type'], 'Temporary Student Visas - ', '')",
+                    "as": "Visa Type Cleaned"
+                }
+            ],
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "Year",
+                    "type": "ordinal",
+                    "title": "Year"
+                },
+                "y": {
+                    "field": "Total",
+                    "type": "quantitative",
+                    "title": "Number of Student Visas"
+                },
+                "color": {
+                    "field": "Visa Type Cleaned",
+                    "type": "nominal",
+                    "title": "Visa Type"
+                },
+                "tooltip": [
+                    { "field": "Year", "type": "ordinal" },
+                    { "field": "Visa Type Cleaned", "type": "nominal" },
+                    { "field": "Total", "type": "quantitative" }
+                ]
+            },
+            "title": {
+                "text": "Student Visas by Type Over Year",
+                "fontSize": 20
+            }
+        };
+
+        const stuBar = 
+        {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 200,
+    "height": 100,
+    "data": {
+      "url": "https://raw.githubusercontent.com/pchu0023/ass2/103fab55969ab2ef1bdb20f8357522798e828558/sub-visa-state.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    "transform": [
+      {
+        "calculate": "toNumber(substring(datum.Month, 4, 8))",
+        "as": "Year"
+      },
+      {
+        "filter": "datum.Year >= 2014 && datum.Year <= 2024"
+      },
+      {
+        "fold": [
+          "Temporary Student Visas - Higher Education",
+          "Temporary Student Visas - Vocational ",
+          "Temporary Student Visas - Schools",
+          "Temporary Student Visas - Independent ELICOS(g)",
+          "Temporary Student Visas - Postgraduate Research",
+          "Temporary Student Visas - Other Students"
+        ],
+        "as": ["Visa Type", "Count"]
+      },
+      {
+        "calculate": "replace(datum['Visa Type'], 'Temporary Student Visas - ', '')",
+        "as": "Visa Type Cleaned"
+      },
+      {
+        "aggregate": [
+          {
+            "op": "sum",
+            "field": "Count",
+            "as": "Total Count"
+          }
+        ],
+        "groupby": ["Visa Type Cleaned"]
+      },
+      {
+        "window": [
+          {"op": "sum", "field": "Total Count", "as": "Overall Total"}
+        ],
+        "frame": [null, null]
+      },
+      {
+        "calculate": "datum['Total Count'] / datum['Overall Total']",
+        "as": "Proportion"
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "Proportion",
+        "type": "quantitative",
+        "axis": {
+          "format": ".0%",
+          "title": "Proportion of Student Visas"
+        }
+      },
+      "y": {
+        "field": "Visa Type Cleaned",
+        "type": "nominal",
+        "axis": {
+          "title": "Student Visa Types"
+        }
+      },
+      "color": {
+        "field": "Visa Type Cleaned",
+        "type": "nominal",
+        "legend": {
+          "title": "Student Visa Types"
+        }
+      },
+      "tooltip": [
+        {"field": "Visa Type Cleaned", "type": "nominal", "title": "Visa Type"},
+        {"field": "Total Count", "type": "quantitative", "title": "Total Visa Count"},
+        {"field": "Proportion", "type": "quantitative", "title": "Proportion", "format": ".2%"}
+      ]
+    }
+  }
+  
+  
+  
+  
+        // Render all visualizations
+        vegaEmbed('#vis1', citizenMap).then(console.log).catch(console.warn);
+        vegaEmbed('#vis2', stackBar).then(console.log).catch(console.warn);
+        vegaEmbed('#vis3', heatGeneral).then(console.log).catch(console.warn);
+        // vegaEmbed('#vis4', stuBar).then(console.log).catch(console.warn);
+        // Placeholder for future visualization in vis5
+        // vegaEmbed('#vis5', yourFutureVisualization).then(console.log).catch(console.warn);
+    </script>
+</body>
+
+</html>
