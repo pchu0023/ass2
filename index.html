@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined Visualizations</title>
+    <title>Visualizations of Australian Arrivals </title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.0"></script>
@@ -15,7 +15,6 @@
             background-color: #f0f4f8;
             max-width: 1200px;
             margin: auto;
-            /* Center the content */
             overflow-x: hidden;
             /* Prevent horizontal overflow */
         }
@@ -30,14 +29,14 @@
         .dashboard {
             display: flex;
             flex-wrap: wrap;
-            /* Allow wrapping for smaller screens */
+            /* Allow wrapping for inside section */
             gap: 20px;
         }
 
         .figures-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            /* Adjust to 2 columns */
+            /* Adjust to 1 block at each row - 1 column */
             gap: 20px;
         }
 
@@ -97,6 +96,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 15px;
+            width: 318px;
             overflow: hidden;
             /* Prevent overflow inside containers */
         }
@@ -126,7 +126,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            max-width: 500px;
+            width: 20px;
             overflow: hidden;
             /* Prevent overflow inside containers */
         }
@@ -147,7 +147,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            width: 300px;
+            width: 290px;
             overflow: hidden;
             /* Prevent overflow inside containers */
         }
@@ -191,8 +191,6 @@
         }
 
         .description {
-            flex-basis: 100%;
-            /* Full width */
             background-color: #e3f2fd;
             padding: 15px;
             border-radius: 10px;
@@ -200,8 +198,6 @@
         }
 
         .findings {
-            flex-basis: 100%;
-            /* Full width */
             background-color: #ffe0b2;
             padding: 15px;
             border-radius: 10px;
@@ -224,7 +220,7 @@
 </head>
 
 <body>
-    <h1>Visualizations of Arrivals and Visa Statistics</h1>
+    <h1>Visualizations of Australian Arrivals and Visa Statistics</h1>
 
     <div class="dashboard">
         <div class="description">
@@ -366,7 +362,7 @@
             <br>
             <div id="vis3"></div> <!-- Heatmap Visualization -->
         </div>
-        <div class="bar-container">
+        <div class="rank-container">
             <div class="chart-title">Student Visa<br> by study purpose per year</div>
             <br>
             <div id="vis4"></div>
@@ -381,7 +377,7 @@
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "title": "Distribution in first half of 2024",
-                "width": 360,
+                "width": 350,
                 "height": 300,
                 "data": {
                     "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
@@ -696,7 +692,7 @@
             // Heatmap Visualization
             const heatGeneral = {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "width": 200,
+                "width": 190,
                 "height": 200,
                 // "title": "Sub-type visas",
                 "data": {
@@ -808,8 +804,8 @@
             const stuPie =
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "width": 150,
                 "height": 240,
+                "width": 180,
                 "data": {
                     "url": "https://raw.githubusercontent.com/pchu0023/ass2/103fab55969ab2ef1bdb20f8357522798e828558/sub-visa-state.csv",
                     "format": {
@@ -968,7 +964,6 @@
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "description": "A horizontal bar chart showing the top 5 countries by total arrivals (excluding Australia) from an external CSV file.",
-                "width": 200,
                 "height": 200,
                 "data": {
                     "url": "https://raw.githubusercontent.com/pchu0023/ass2/5a0d6da3596ebbd2b09fd3bf5537aa8a9d8211cd/citizenData.csv",
