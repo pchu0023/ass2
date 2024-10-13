@@ -91,6 +91,16 @@
             /* Prevent overflow inside containers */
         }
 
+        .pie-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 318px;
+            overflow: hidden;
+            /* Prevent overflow inside containers */
+        }
+
         .rank-container {
             background-color: #ffffff;
             border-radius: 10px;
@@ -99,6 +109,21 @@
             width: 318px;
             overflow: hidden;
             /* Prevent overflow inside containers */
+        }
+
+        @media (min-width: 1440px) {
+            .rank-container {
+                width: 338px;
+            }
+
+            .chart-container {
+                width: 1200px;
+
+            }
+            .pie-container {
+                width: 340px;
+
+            }
         }
 
         .chart-container {
@@ -195,6 +220,7 @@
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* width: 1100px; */
         }
 
         .findings {
@@ -362,7 +388,7 @@
             <br>
             <div id="vis3"></div> <!-- Heatmap Visualization -->
         </div>
-        <div class="rank-container">
+        <div class="pie-container">
             <div class="chart-title">Student Visa<br> by study purpose per year</div>
             <br>
             <div id="vis4"></div>
@@ -964,7 +990,7 @@
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "description": "A horizontal bar chart showing the top 5 countries by total arrivals (excluding Australia) from an external CSV file.",
-                "height": 200,
+                "height": 190,
                 "data": {
                     "url": "https://raw.githubusercontent.com/pchu0023/ass2/5a0d6da3596ebbd2b09fd3bf5537aa8a9d8211cd/citizenData.csv",
                     "format": {
